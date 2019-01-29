@@ -27,7 +27,7 @@ public class Server {
         if (args.length != 1)
             usage();
 
-        port(8081);
+        port(5901);
         setUpIndex(args[0]);
         setUpEndPoints();
     }
