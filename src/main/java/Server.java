@@ -23,7 +23,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         port(8081);
-//        setUpIndex();
+        setUpIndex();
         setUpEndPoints();
     }
 
@@ -51,7 +51,7 @@ public class Server {
 
             JSONObject json = new JSONObject(req.body());
 
-            if ("bm25".equals(json.get("algorithm"))) {
+            if ("bm25".equals(json.get("algo"))) {
                 float k1 = json.getFloat("k1");
                 float b = json.getFloat("b");
                 searcher.setSimilarity(new BM25Similarity(k1, b));
