@@ -18,7 +18,7 @@ import static spark.Spark.*;
 
 public class Server {
 
-    private static IndexSearcher searcher;
+//    private static IndexSearcher searcher;
 
     public static void main(String[] args) throws IOException {
 
@@ -46,30 +46,14 @@ public class Server {
     private static void setUpEndPoints() {
 
         get("/query", "application/json", (req, res) -> {
-//            Example req.body format
-//            {
-//                "algo" : "bm25",
-//                "k1": 0.5,
-//                "b": 0.45,
-//                "query": "insert your query here"
-//
-//            }
-
-//            {
-//                "algo" : "lmd",
-//                "mu": 100,
-//                "query": "insert your query here"
-//
-//            }
-
             JSONObject json = new JSONObject(req.body());
 
             if ("bm25".equals(json.get("algo"))) {
                 float k1 = json.getFloat("k1");
                 float b = json.getFloat("b");
-                searcher.setSimilarity(new BM25Similarity(0.5f, 0.45f));
+//                searcher.setSimilarity(new BM25Similarity(0.5f, 0.45f));
             } else {
-                searcher.setSimilarity(new LMDirichletSimilarity(json.getFloat("mu")));
+//                searcher.setSimilarity(new LMDirichletSimilarity(json.getFloat("mu")));
             }
 //
             return "algo: " + json.get("algorithm") + "\nk1: " + json.get("k1") + "\nb: " + json.get("b") + "\nquery: " + json.get("query");
@@ -83,7 +67,7 @@ public class Server {
      * @throws IOException
      */
     private static void setUpIndex(String indexPath) throws IOException {
-        searcher = setupIndexSearcher(indexPath, "paragraph.lucene"); //Create IndexSearcher;
+//        searcher = setupIndexSearcher(indexPath, "paragraph.lucene"); //Create IndexSearcher;
     }
 
     @NotNull
