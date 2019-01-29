@@ -22,9 +22,21 @@ public class Server {
     private static IndexSearcher searcher;
 
     public static void main(String[] args) throws IOException {
+
+        System.setProperty("file.encoding", "UTF-8");
+
+        if (args.length != 1)
+            usage();
+
         port(8081);
         setUpIndex();
         setUpEndPoints();
+    }
+
+    private static void usage() {
+        System.out.println("Command line parameters: action OutlineCBOR LuceneINDEX\n" +
+                "action is one of output-sections | paragraphs-run-sections | paragraphs-run-pages | pages-run-pages | iterate-topics");
+        System.exit(-1);
     }
 
     /**
