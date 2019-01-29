@@ -62,18 +62,18 @@ public class Server {
 //
 //            }
 
-//            JSONObject json = new JSONObject(req.body());
-            return req.body();
+            JSONObject json = new JSONObject(req.body());
+//            return req.body();
 
-//            if ("bm25".equals(json.get("algo"))) {
+            if ("bm25".equals(json.get("algo"))) {
 //                float k1 = json.getFloat("k1");
 //                float b = json.getFloat("b");
-//                searcher.setSimilarity(new BM25Similarity(k1, b));
-//            } else {
-//                searcher.setSimilarity(new LMDirichletSimilarity(json.getFloat("mu")));
-//            }
+                searcher.setSimilarity(new BM25Similarity(0.5f, 0.45f));
+            } else {
+                searcher.setSimilarity(new LMDirichletSimilarity(json.getFloat("mu")));
+            }
 //
-//            return "algo: " + json.get("algorithm") + "\nk1: " + json.get("k1") + "\nb: " + json.get("b") + "\nquery: " + json.get("query");
+            return "algo: " + json.get("algorithm") + "\nk1: " + json.get("k1") + "\nb: " + json.get("b") + "\nquery: " + json.get("query");
         });
     }
 
