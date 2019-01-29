@@ -18,16 +18,17 @@ import static spark.Spark.*;
 
 public class Server {
 
-//    private static IndexSearcher searcher;
+    private static IndexSearcher searcher;
 
     public static void main(String[] args) throws IOException {
 
         System.setProperty("file.encoding", "UTF-8");
 
-        if (args.length != 1)
+        if (args.length != 1) {
             usage();
+        }
 
-        port(5901);
+        port(5902);
         setUpIndex(args[0]);
         setUpEndPoints();
     }
@@ -47,16 +48,16 @@ public class Server {
 
         get("/query", "application/json", (req, res) -> {
             JSONObject json = new JSONObject(req.body());
-
-            if ("bm25".equals(json.get("algo"))) {
+//
+            if ("bm25".equals(json.getString("algo"))) {
                 float k1 = json.getFloat("k1");
                 float b = json.getFloat("b");
-//                searcher.setSimilarity(new BM25Similarity(0.5f, 0.45f));
+                searcher.setSimilarity(new BM25Similarity(0.5f, 0.45f));
             } else {
-//                searcher.setSimilarity(new LMDirichletSimilarity(json.getFloat("mu")));
+                searcher.setSimilarity(new LMDirichletSimilarity(json.getFloat("mu")));
             }
 //
-            return "algo: " + json.get("algorithm") + "\nk1: " + json.get("k1") + "\nb: " + json.get("b") + "\nquery: " + json.get("query");
+            return "algo: " + json.get("algorithm") + "\nk1: " + json.get("k1") + "\nb: " + json.get("b") + "\nquery: " + json.get("query")+ "\nsearcher: "+searcher.toString();
         });
     }
 
@@ -67,7 +68,7 @@ public class Server {
      * @throws IOException
      */
     private static void setUpIndex(String indexPath) throws IOException {
-//        searcher = setupIndexSearcher(indexPath, "paragraph.lucene"); //Create IndexSearcher;
+        searcher = setupIndexSearcher(indexPath, "paragraph.lucene"); //Create IndexSearcher;
     }
 
     @NotNull

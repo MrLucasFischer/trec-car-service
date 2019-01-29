@@ -54,8 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="47" column="57" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
+            <state relative-caret-position="317">
+              <caret line="59" column="175" selection-start-line="59" selection-start-column="175" selection-end-line="59" selection-end-column="175" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -148,7 +148,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548780377083" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548780910269" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../trec-car-tools-example" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
@@ -164,7 +164,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Remote.Unnamed">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Server" />
       <module name="trec-car-service" />
@@ -277,7 +277,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548779372225</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="refactoring code">
+      <created>1548780388646</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1548780388646</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -294,7 +301,7 @@
       <window_info anchor="bottom" id="Messages" weight="0.32958034" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.18935516" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.18935516" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39918116" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -322,7 +329,8 @@
     <MESSAGE value="correcting server" />
     <MESSAGE value="updates" />
     <MESSAGE value="updating run.sh" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating run.sh" />
+    <MESSAGE value="refactoring code" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring code" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pom.xml">
@@ -407,8 +415,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="47" column="57" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
+        <state relative-caret-position="317">
+          <caret line="59" column="175" selection-start-line="59" selection-start-column="175" selection-end-line="59" selection-end-column="175" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
