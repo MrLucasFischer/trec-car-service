@@ -20,7 +20,7 @@ import java.util.Iterator;
 
 public class TrecCarBuildLuceneIndex {
 
-    private static final String LUCENE_INDEX = "/scratch/fmartins/paragraphIndex";
+    private static final String LUCENE_INDEX = "/scratch/fmartins/paragraphIndex"; //TODO REMOVE
 
 
     public static void main(String[] args) throws IOException{

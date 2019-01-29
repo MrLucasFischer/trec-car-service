@@ -18,7 +18,6 @@ import static spark.Spark.*;
 
 public class Server {
 
-    private static final String INDEX_PATH = "/scratch/fmartins/paragraphIndex";
     private static IndexSearcher searcher;
 
     public static void main(String[] args) throws IOException {
@@ -29,13 +28,15 @@ public class Server {
             usage();
 
         port(8081);
-        setUpIndex();
+        setUpIndex(args[1]);
         setUpEndPoints();
     }
 
+    /**
+     * Error message if not command line parameters not passed
+     */
     private static void usage() {
-        System.out.println("Command line parameters: action OutlineCBOR LuceneINDEX\n" +
-                "action is one of output-sections | paragraphs-run-sections | paragraphs-run-pages | pages-run-pages | iterate-topics");
+        System.out.println("Command line parameters: indexPath");
         System.exit(-1);
     }
 
@@ -81,8 +82,8 @@ public class Server {
      *
      * @throws IOException
      */
-    private static void setUpIndex() throws IOException {
-        searcher = setupIndexSearcher(INDEX_PATH, "paragraph.lucene"); //Create IndexSearcher;
+    private static void setUpIndex(String indexPath) throws IOException {
+        searcher = setupIndexSearcher(indexPath, "paragraph.lucene"); //Create IndexSearcher;
     }
 
     @NotNull
