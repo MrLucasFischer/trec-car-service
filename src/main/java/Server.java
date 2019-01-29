@@ -47,9 +47,8 @@ public class Server {
     private static void setUpEndPoints() {
 
         get("/query", "application/json", (req, res) -> {
-            return "Hello";
-//            JSONObject json = new JSONObject(req.body());
-//
+            JSONObject json = new JSONObject(req.body());
+            return "Still no error";
 //            if ("bm25".equals(json.getString("algo"))) {
 //                float k1 = json.getFloat("k1");
 //                float b = json.getFloat("b");
@@ -67,7 +66,6 @@ public class Server {
      * Creates and sets up the index
      */
     private static void setUpIndex(String indexPath) {
-        System.out.println(indexPath);
         try {
             searcher = setupIndexSearcher(indexPath, "paragraph.lucene"); //Create IndexSearcher;
         } catch (Exception e) {
