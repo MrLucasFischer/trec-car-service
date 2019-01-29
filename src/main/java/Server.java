@@ -28,7 +28,7 @@ public class Server {
             usage();
         }
 
-        port(5902);
+        port(5901);
         setUpIndex(args[0]);
         setUpEndPoints();
     }
