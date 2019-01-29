@@ -29,7 +29,7 @@ public class Server {
         }
 
         port(5901);
-//        setUpIndex(args[0]);
+        setUpIndex(args[0]);
         setUpEndPoints();
     }
 
@@ -69,6 +69,7 @@ public class Server {
      * @throws IOException
      */
     private static void setUpIndex(String indexPath) throws IOException {
+        System.out.println();
         searcher = setupIndexSearcher(indexPath, "paragraph.lucene"); //Create IndexSearcher;
     }
 
