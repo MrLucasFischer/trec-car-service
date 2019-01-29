@@ -28,7 +28,7 @@ public class Server {
             usage();
 
         port(8081);
-        setUpIndex(args[1]);
+        setUpIndex(args[0]);
         setUpEndPoints();
     }
 
