@@ -1,6 +1,11 @@
-java -Xmn100M  -XX:+PrintGCDetails  -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40\
-     -Dcom.sun.management.jmxremote.port=5050 \
-     -Dcom.sun.management.jmxremote.rmi.port=5050 \
-     -Dcom.sun.management.jmxremote.host=localhost \
-     -Djava.rmi.server.hostname=locahost \
-     -cp target/trec-car-service-1.0-SNAPSHOT-jar-with-dependencies.jar Server /scratch/fmartins/paragraphIndex/
+java -server \
+ -XX:+PrintCommandLineFlags \
+  -XX:+DisableExplicitGC \
+   -XX:+UseConcMarkSweepGC \
+   -XX:CMSInitiatingOccupancyFraction=80 \
+   -Dcom.sun.management.jmxremote \
+   -Dcom.sun.management.jmxremote.port=9191 \
+   -Dcom.sun.management.jmxremote.authenticate=false \
+   -Dcom.sun.management.jmxremote.ssl=false \
+   -Djava.rmi.server.hostname=zarco.novasearch.org \
+   -cp target/trec-car-service-1.0-SNAPSHOT-jar-with-dependencies.jar Server /scratch/fmartins/paragraphIndex/
