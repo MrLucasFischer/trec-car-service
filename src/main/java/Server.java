@@ -47,7 +47,8 @@ public class Server {
     private static void setUpEndPoints() {
 
         get("/query", "application/json", (req, res) -> {
-            JSONObject json = new JSONObject(req.body());
+            return "Hello";
+//            JSONObject json = new JSONObject(req.body());
 //
 //            if ("bm25".equals(json.getString("algo"))) {
 //                float k1 = json.getFloat("k1");
@@ -57,7 +58,7 @@ public class Server {
 //                searcher.setSimilarity(new LMDirichletSimilarity(json.getFloat("mu")));
 //            }
 //
-            return "algo: " + json.get("algorithm") + "\nk1: " + json.get("k1") + "\nb: " + json.get("b") + "\nquery: " + json.get("query")+ "\nsearcher: ";
+//            return "algo: " + json.get("algorithm") + "\nk1: " + json.get("k1") + "\nb: " + json.get("b") + "\nquery: " + json.get("query")+ "\nsearcher: ";
         });
     }
 
