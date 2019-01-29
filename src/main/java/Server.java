@@ -20,7 +20,7 @@ public class Server {
 
     private static IndexSearcher searcher;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         System.setProperty("file.encoding", "UTF-8");
 
@@ -65,12 +65,14 @@ public class Server {
 
     /**
      * Creates and sets up the index
-     *
-     * @throws IOException
      */
-    private static void setUpIndex(String indexPath) throws IOException {
-        System.out.println();
-        searcher = setupIndexSearcher(indexPath, "paragraph.lucene"); //Create IndexSearcher;
+    private static void setUpIndex(String indexPath) {
+        System.out.println(indexPath);
+        try {
+            searcher = setupIndexSearcher(indexPath, "paragraph.lucene"); //Create IndexSearcher;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @NotNull
