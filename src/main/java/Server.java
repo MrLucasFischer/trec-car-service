@@ -63,11 +63,10 @@ public class Server {
 //            }
 
             JSONObject json = new JSONObject(req.body());
-//            return req.body();
 
             if ("bm25".equals(json.get("algo"))) {
-//                float k1 = json.getFloat("k1");
-//                float b = json.getFloat("b");
+                float k1 = json.getFloat("k1");
+                float b = json.getFloat("b");
                 searcher.setSimilarity(new BM25Similarity(0.5f, 0.45f));
             } else {
                 searcher.setSimilarity(new LMDirichletSimilarity(json.getFloat("mu")));
