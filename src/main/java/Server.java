@@ -1,32 +1,10 @@
-import edu.unh.cs.treccar_v2.Data;
-import edu.unh.cs.treccar_v2.read_data.DeserializeData;
-import org.apache.lucene.analysis.en.EnglishAnalyzer;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.similarities.BM25Similarity;
-import org.apache.lucene.search.similarities.LMDirichletSimilarity;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.FSDirectory;
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.List;
 
 import static spark.Spark.*;
 
 public class Server {
 
-    private static IndexSearcher searcher;
+    private static IndexController indexController = new IndexController();
 
     public static void main(String[] args) {
 
@@ -61,57 +39,22 @@ public class Server {
             if ("bm25".equals(json.getString("algo"))) {
                 float k1 = json.getFloat("k1");
                 float b = json.getFloat("b");
-                searcher.setSimilarity(new BM25Similarity(0.5f, 0.45f));
+                indexController.setSimilarity(k1, b);
             } else {
-                searcher.setSimilarity(new LMDirichletSimilarity(json.getFloat("mu")));
+                indexController.setSimilarity(json.getFloat("mu"));
             }
 
-            return getTopPassage(json.getString("query"));
+            return indexController.getTopPassage(json.getString("query"));
         });
     }
 
-    private static String getTopPassage(String userQuery) {
-        QueryBuilder queryBuilder = new QueryBuilder(new EnglishAnalyzer());
-        try {
-            TopDocs tops = searcher.search(queryBuilder.toQuery(userQuery), 100);
-            ScoreDoc[] scoreDoc = tops.scoreDocs;
-            HashSet<Object> seen = new HashSet<>(100);
-//            //TODO START FROM HERE
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "TBD";
-    }
-
-
     /**
-     * Creates and sets up the index
+     * Calls IndexController to set up the IndexSearch for this session searching on the
+     * index specified by "indexPath"
+     *
+     * @param indexPath - Path to Index to be searched
      */
     private static void setUpIndex(String indexPath) {
-        try {
-            searcher = setupIndexSearcher(indexPath, "paragraph.lucene"); //Create IndexSearcher;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @NotNull
-    private static IndexSearcher setupIndexSearcher(String indexPath, String typeIndex) throws IOException {
-        Path path = FileSystems.getDefault().getPath(indexPath, typeIndex);
-        Directory indexDir = FSDirectory.open(path);
-        IndexReader reader = DirectoryReader.open(indexDir);
-        return new IndexSearcher(reader);
-    }
-
-    @NotNull
-    private static String buildSectionQueryStr(Data.Page page, List<Data.Section> sectionPath) {
-        StringBuilder queryStr = new StringBuilder();
-        queryStr.append(page.getPageName());
-        for (Data.Section section : sectionPath) {
-            queryStr.append(" ").append(section.getHeading());
-        }
-//        System.out.println("queryStr = " + queryStr);
-        return queryStr.toString();
+        indexController.setUpIndexSearcher(indexPath);
     }
 }
