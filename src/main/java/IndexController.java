@@ -12,6 +12,9 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,10 +68,15 @@ public class IndexController {
     public ArrayList<String> getPassages(String userQuery, int numberOfPassages) {
         try {
 
-            List<String> lines = Files.readAllLines(Paths.get("../resources/english-stoplist.txt"), StandardCharsets.UTF_8);
-            HashSet<String> stopwords = new HashSet<>(lines);
-            CharArraySet stopWordsSet = new CharArraySet(stopwords, true);
+            InputStream in = getClass().getResourceAsStream("/english-stoplist.txt");
+            HashSet<String> stopwords = new HashSet<>();
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
+                for (String line; (line = br.readLine()) != null; ) {
+                    stopwords.add(line);
+                }
+            }
 
+            CharArraySet stopWordsSet = new CharArraySet(stopwords, true);
             QueryBuilder queryBuilder = new QueryBuilder(new EnglishAnalyzer(stopWordsSet));
 
             TopDocs tops = searcher.search(queryBuilder.toQuery(userQuery), numberOfPassages);
