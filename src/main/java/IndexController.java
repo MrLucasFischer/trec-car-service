@@ -1,4 +1,6 @@
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.IndexSearcher;
@@ -10,9 +12,15 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 
 public class IndexController {
@@ -50,24 +58,50 @@ public class IndexController {
     /**
      * Querys the Index with the given user query and retrieves only the top passage found for that query
      *
-     * @param userQuery - User query to query the index
-     * @return
+     * @param userQuery        - User query to query the index
+     * @param numberOfPassages - Specifies the number of passages to find
+     * @return A List with, at most, the specified number of passages found for the user query
      */
-    public String getTopPassage(String userQuery) {
-        QueryBuilder queryBuilder = new QueryBuilder(new EnglishAnalyzer());
+    public ArrayList<String> getPassages(String userQuery, int numberOfPassages) {
         try {
-            TopDocs tops = searcher.search(queryBuilder.toQuery(userQuery), 100);
-            ScoreDoc[] scoreDoc = tops.scoreDocs;
-            HashSet<Object> seen = new HashSet<>(100);
-            //TODO START FROM HERE
 
+            List<String> lines = Files.readAllLines(Paths.get("../resources/english-stoplist.txt"), StandardCharsets.UTF_8);
+            HashSet<String> stopwords = new HashSet<>(lines);
+            CharArraySet stopWordsSet = new CharArraySet(stopwords, true);
+
+            QueryBuilder queryBuilder = new QueryBuilder(new EnglishAnalyzer(stopWordsSet));
+
+            TopDocs tops = searcher.search(queryBuilder.toQuery(userQuery), numberOfPassages);
+            ScoreDoc[] scoreDoc = tops.scoreDocs;
+
+            HashMap<String, String> passages = new HashMap<>();
+
+            for (ScoreDoc score : scoreDoc) {
+
+                final Document doc = searcher.doc(score.doc); // to access stored content
+                final String paragraphid = doc.getField("paragraphid").stringValue();
+                final String passage = doc.getField("text").stringValue();
+
+                if (!passages.containsKey(paragraphid)) {
+                    passages.put(paragraphid, passage);
+                }
+            }
+
+            return new ArrayList<>(passages.values());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "TBD";
+        return null;
     }
 
-
+    /**
+     * Opens the directory that contains the index and passes it to IndexSearcher
+     *
+     * @param indexPath - Path to the Index directory
+     * @param typeIndex - The type of the index, in this example its fixed to "paragraphs.lucene"
+     * @return An IndexSearcher Instance
+     * @throws IOException in case the the path to index is incorrect
+     */
     @NotNull
     private IndexSearcher setupIndexSearcher(String indexPath, String typeIndex) throws IOException {
         Path path = FileSystems.getDefault().getPath(indexPath, typeIndex);
@@ -75,15 +109,4 @@ public class IndexController {
         IndexReader reader = DirectoryReader.open(indexDir);
         return new IndexSearcher(reader);
     }
-
-//    @NotNull
-//    private String buildSectionQueryStr(Data.Page page, List<Data.Section> sectionPath) {
-//        StringBuilder queryStr = new StringBuilder();
-//        queryStr.append(page.getPageName());
-//        for (Data.Section section : sectionPath) {
-//            queryStr.append(" ").append(section.getHeading());
-//        }
-////        System.out.println("queryStr = " + queryStr);
-//        return queryStr.toString();
-//    }
 }

@@ -44,7 +44,7 @@ public class Server {
                 indexController.setSimilarity(json.getFloat("mu"));
             }
 
-            return indexController.getTopPassage(json.getString("query"));
+            return indexController.getPassages(json.getString("query"), 1).get(0);
         });
     }
 
