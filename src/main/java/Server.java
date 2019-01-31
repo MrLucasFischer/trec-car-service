@@ -1,5 +1,7 @@
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import static spark.Spark.*;
 
 public class Server {
@@ -44,7 +46,9 @@ public class Server {
                 indexController.setSimilarity(json.getFloat("mu"));
             }
 
-            return indexController.getPassages(json.getString("query"), 1).get(0);
+            ArrayList<String> passages = indexController.getPassages(json.getString("query"), 1);
+
+            return passages.size() != 0 ? passages.get(0) : "I'm sorry, I don't have an answer for that";
         });
     }
 
