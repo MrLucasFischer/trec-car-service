@@ -1,5 +1,7 @@
 import org.json.JSONObject;
+import spark.QueryParamsMap;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import static spark.Spark.*;
@@ -35,18 +37,20 @@ public class Server {
     private static void setUpEndPoints() {
 
         get("/search", (req, res) -> {
+            QueryParamsMap queryMap = req.queryMap();
+            System.out.println(queryMap);
 
-            JSONObject json = new JSONObject(req.queryMap());
+//            JSONObject json = new JSONObject(req.queryMap());
 
-            if ("bm25".equals(json.getString("algo"))) {
-                float k1 = json.getFloat("k1");
-                float b = json.getFloat("b");
+            if ("bm25".equals(queryMap.get("algo").value())) {
+                float k1 = queryMap.get("k1").floatValue();
+                float b = queryMap.get("b").floatValue();
                 indexController.setSimilarity(k1, b);
             } else {
-                indexController.setSimilarity(json.getFloat("mu"));
+                indexController.setSimilarity(queryMap.get("mu").floatValue());
             }
 
-            ArrayList<String> passages = indexController.getPassages(json.getString("q"), 1);
+            ArrayList<String> passages = indexController.getPassages(queryMap.get("q").value(), 1);
 
             return passages.size() != 0 ? passages.get(0) : "I'm sorry, I don't have an answer for that";
         });
