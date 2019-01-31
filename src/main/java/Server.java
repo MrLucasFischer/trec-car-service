@@ -36,7 +36,7 @@ public class Server {
 
         get("/query", "application/json", (req, res) -> {
 
-            JSONObject json = new JSONObject(req.body());
+            JSONObject json = new JSONObject(req.params());
 
             if ("bm25".equals(json.getString("algo"))) {
                 float k1 = json.getFloat("k1");
