@@ -34,9 +34,9 @@ public class Server {
      */
     private static void setUpEndPoints() {
 
-        get("/query", "application/json", (req, res) -> {
+        get("/search", (req, res) -> {
 
-            JSONObject json = new JSONObject(req.params());
+            JSONObject json = new JSONObject(req.queryMap());
 
             if ("bm25".equals(json.getString("algo"))) {
                 float k1 = json.getFloat("k1");
@@ -46,7 +46,7 @@ public class Server {
                 indexController.setSimilarity(json.getFloat("mu"));
             }
 
-            ArrayList<String> passages = indexController.getPassages(json.getString("query"), 1);
+            ArrayList<String> passages = indexController.getPassages(json.getString("q"), 1);
 
             return passages.size() != 0 ? passages.get(0) : "I'm sorry, I don't have an answer for that";
         });
