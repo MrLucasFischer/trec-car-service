@@ -1,7 +1,5 @@
-import org.json.JSONObject;
 import spark.QueryParamsMap;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import static spark.Spark.*;
@@ -38,9 +36,6 @@ public class Server {
 
         get("/search", (req, res) -> {
             QueryParamsMap queryMap = req.queryMap();
-            System.out.println(queryMap);
-
-//            JSONObject json = new JSONObject(req.queryMap());
 
             if ("bm25".equals(queryMap.get("algo").value())) {
                 float k1 = queryMap.get("k1").floatValue();
