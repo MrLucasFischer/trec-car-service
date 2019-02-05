@@ -1,6 +1,9 @@
+import spark.ModelAndView;
 import spark.QueryParamsMap;
+import spark.template.freemarker.FreeMarkerEngine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static spark.Spark.*;
 
@@ -33,6 +36,8 @@ public class Server {
      * Sets up the endpoints for the server
      */
     private static void setUpEndPoints() {
+
+        get("/", (req, res) -> new ModelAndView(new HashMap<>(), "index.ftl"), new FreeMarkerEngine());
 
         get("/search", (req, res) -> {
             QueryParamsMap queryMap = req.queryMap();

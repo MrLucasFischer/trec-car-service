@@ -62,6 +62,13 @@
             <version>20180813</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-template-freemarker</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
+
     </dependencies>
 
 
