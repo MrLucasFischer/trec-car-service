@@ -43,6 +43,8 @@ public class Server {
 
         get("/", (req, res) -> engine.render(null, "index.ftl"));
 
+        get("/search_web", (req, res) -> req.queryParams("query_text_field"));
+
         get("/search", (req, res) -> {
             QueryParamsMap queryMap = req.queryMap();
 
