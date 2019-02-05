@@ -11,7 +11,7 @@ class App extends Component {
       serverResponse: '',
       messages: [
         {
-          text: "This is a test message!",
+          text: "Hi! Ask me a question and I'll answer!",
           fromBot: true,
         }
       ]
@@ -48,7 +48,7 @@ class App extends Component {
         })
         this.setState({ messages: updatedMessages })
       })
-    
+
   }
 
 
@@ -57,7 +57,7 @@ class App extends Component {
       <div className="App">
 
         <div className="App-header">
-          <h1>My Chat App</h1>
+          <h1>Chatbot</h1>
         </div>
         <Messages
           messages={this.state.messages}
@@ -68,26 +68,6 @@ class App extends Component {
       </div>
     );
   }
-  // render() {
-  //   return (
-  //     <div className="App">
-  //       <h1>Welcome to the chatbot app!</h1>
-  //       <form onSubmit={(event) => this.handleSubmit(event)}>
-
-
-  //         <label>
-  //           Insert your query:
-  //           <br />
-  //           <input type="text" value={this.state.value} onChange={(event) => this.handleChange(event)} />
-  //         </label>
-
-  //         <br />
-  //         <input type="submit" value="Submit" />
-  //       </form>
-  //       <p>{this.state.serverResponse}</p>
-  //     </div>
-  //   );
-  // }
 }
 
 export default App;
