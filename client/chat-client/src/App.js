@@ -13,7 +13,11 @@ class App extends Component {
   handleSubmit(event) {
     fetch(`http://localhost:5901/search?algo=bm25&k1=0.5&b=0.45&q=${this.state.value}`)
       .then(result => result.text())
-      .then(data => this.setState({ serverResponse: data }))
+      .then(data => {
+        console.log("hasdasd")
+        console.log(data);
+        this.setState({ serverResponse: data })
+      })
     event.preventDefault()
   }
 
@@ -37,6 +41,7 @@ class App extends Component {
           <br />
           <input type="submit" value="Submit" />
         </form>
+        <p>{this.state.serverResponse}</p>
       </div>
     );
   }
