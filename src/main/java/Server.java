@@ -18,10 +18,10 @@ public class Server {
         }
 
         port(5901);
-        staticFiles.externalLocation("src/resources");
+        staticFiles.externalLocation("src/main/resources");
 
         // Configure freemarker engine
-        FreemarkerEngine engine = new FreemarkerEngine("src/resources/");
+        FreemarkerEngine engine = new FreemarkerEngine("src/main/resources/");
 
         setUpIndex(args[0]);
         setUpEndPoints(engine);
