@@ -17,7 +17,7 @@ public class Server {
         }
 
         port(5901);
-
+        CorsFilter.apply();
         setUpIndex(args[0]);
         setUpEndPoints();
     }

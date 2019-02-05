@@ -8,17 +8,28 @@ class App extends Component {
       value: '',
       serverResponse: ''
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
-    fetch("localhost:5901")
-      .then(results => {
-        console.log(results)
-        return results.body;
-      })
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText)
+      }
+    };
+    xmlhttp.open('GET', "http://localhost:5901/");
+    xmlhttp.send();
+    event.preventDefault()
+    // fetch("http://localhost:5901/").then(result => {
+    //   console.log("sutff");
+    //   return result.body;
+    // }).then(data => console.log(data))
+    // event.preventDefault();
   }
 
   handleChange(event) {
+    console.log("stuff")
     this.setState({ value: event.target.value });
   }
 
@@ -26,7 +37,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Welcome to the chatbot app!</h1>
-        <form onSubmit={(event) => this.handleSubmit(event)}>
+        <form onSubmit={this.handleSubmit}>
 
 
           <label>
