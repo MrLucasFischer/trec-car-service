@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Input from "./Input"
+import Messages from "./Messages";
 import './App.css';
 
 class App extends Component {
@@ -6,7 +8,13 @@ class App extends Component {
     super();
     this.state = {
       value: '',
-      serverResponse: ''
+      serverResponse: '',
+      messages: [
+        {
+          text: "This is a test message!",
+          fromBot: true,
+        }
+      ]
     }
   }
 
@@ -14,8 +22,6 @@ class App extends Component {
     fetch(`http://localhost:5901/search?algo=bm25&k1=0.5&b=0.45&q=${this.state.value}`)
       .then(result => result.text())
       .then(data => {
-        console.log("hasdasd")
-        console.log(data);
         this.setState({ serverResponse: data })
       })
     event.preventDefault()
@@ -25,26 +31,63 @@ class App extends Component {
     this.setState({ value: event.target.value });
   }
 
+  onSendMessage = (message) => {
+    const messages = this.state.messages
+    messages.push({
+      text: message,
+      fromBot: false
+    })
+    this.setState({ messages: messages })
+    fetch(`http://localhost:5901/search?algo=bm25&k1=0.5&b=0.45&q=${message}`)
+      .then(result => result.text())
+      .then(data => {
+        const updatedMessages = this.state.messages
+        updatedMessages.push({
+          text: data,
+          fromBot: true
+        })
+        this.setState({ messages: updatedMessages })
+      })
+    
+  }
+
+
   render() {
     return (
       <div className="App">
-        <h1>Welcome to the chatbot app!</h1>
-        <form onSubmit={(event) => this.handleSubmit(event)}>
 
-
-          <label>
-            Insert your query:
-            <br />
-            <input type="text" value={this.state.value} onChange={(event) => this.handleChange(event)} />
-          </label>
-
-          <br />
-          <input type="submit" value="Submit" />
-        </form>
-        <p>{this.state.serverResponse}</p>
+        <div className="App-header">
+          <h1>My Chat App</h1>
+        </div>
+        <Messages
+          messages={this.state.messages}
+        />
+        <Input
+          onSendMessage={this.onSendMessage}
+        />
       </div>
     );
   }
+  // render() {
+  //   return (
+  //     <div className="App">
+  //       <h1>Welcome to the chatbot app!</h1>
+  //       <form onSubmit={(event) => this.handleSubmit(event)}>
+
+
+  //         <label>
+  //           Insert your query:
+  //           <br />
+  //           <input type="text" value={this.state.value} onChange={(event) => this.handleChange(event)} />
+  //         </label>
+
+  //         <br />
+  //         <input type="submit" value="Submit" />
+  //       </form>
+  //       <p>{this.state.serverResponse}</p>
+  //     </div>
+  //   );
+  // }
 }
 
 export default App;
