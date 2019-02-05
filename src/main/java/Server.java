@@ -21,7 +21,7 @@ public class Server {
         staticFiles.externalLocation("src/resources");
 
         // Configure freemarker engine
-        FreemarkerEngine engine = new FreemarkerEngine("src/resources/templates");
+        FreemarkerEngine engine = new FreemarkerEngine("src/resources/");
 
         setUpIndex(args[0]);
         setUpEndPoints(engine);
