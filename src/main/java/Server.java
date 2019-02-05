@@ -1,9 +1,7 @@
-import spark.ModelAndView;
 import spark.QueryParamsMap;
-import spark.template.freemarker.FreeMarkerEngine;
+import utils.FreemarkerEngine;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static spark.Spark.*;
 
@@ -20,8 +18,13 @@ public class Server {
         }
 
         port(5901);
+        staticFiles.externalLocation("src/resources");
+
+        // Configure freemarker engine
+        FreemarkerEngine engine = new FreemarkerEngine("src/resources/templates");
+
         setUpIndex(args[0]);
-        setUpEndPoints();
+        setUpEndPoints(engine);
     }
 
     /**
@@ -35,9 +38,10 @@ public class Server {
     /**
      * Sets up the endpoints for the server
      */
-    private static void setUpEndPoints() {
+    private static void setUpEndPoints(FreemarkerEngine engine) {
 
-        get("/", (req, res) -> new ModelAndView(new HashMap<>(), "index.ftl"), new FreeMarkerEngine());
+
+        get("/", (req, res) -> engine.render(null, "index.ftl"));
 
         get("/search", (req, res) -> {
             QueryParamsMap queryMap = req.queryMap();
