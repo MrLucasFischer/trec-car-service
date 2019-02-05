@@ -1,5 +1,4 @@
 import spark.QueryParamsMap;
-import utils.FreemarkerEngine;
 
 import java.util.ArrayList;
 
@@ -18,13 +17,9 @@ public class Server {
         }
 
         port(5901);
-        staticFiles.externalLocation("src/main/resources");
-
-        // Configure freemarker engine
-        FreemarkerEngine engine = new FreemarkerEngine("src/main/resources/");
 
         setUpIndex(args[0]);
-        setUpEndPoints(engine);
+        setUpEndPoints();
     }
 
     /**
@@ -38,12 +33,10 @@ public class Server {
     /**
      * Sets up the endpoints for the server
      */
-    private static void setUpEndPoints(FreemarkerEngine engine) {
+    private static void setUpEndPoints() {
 
 
-        get("/", (req, res) -> engine.render(null, "index.ftl"));
-
-        get("/search_web", (req, res) -> req.queryParams("query_text_field"));
+        get("/", (req, res) -> "hello");
 
         get("/search", (req, res) -> {
             QueryParamsMap queryMap = req.queryMap();

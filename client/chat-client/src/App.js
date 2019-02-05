@@ -1,25 +1,43 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      value: '',
+      serverResponse: ''
+    }
+  }
+
+  handleSubmit(event) {
+    fetch("localhost:5901")
+      .then(results => {
+        console.log(results)
+        return results.body;
+      })
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Welcome to the chatbot app!</h1>
+        <form onSubmit={(event) => this.handleSubmit(event)}>
+
+
+          <label>
+            Insert your query:
+            <br />
+            <input type="text" value={this.state.value} onChange={(event) => this.handleChange(event)} />
+          </label>
+
+          <br />
+          <input type="submit" value="Submit" />
+        </form>
       </div>
     );
   }
