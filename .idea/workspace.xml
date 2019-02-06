@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="539ed9eb-ef00-4843-bf8e-f046e5cf4da3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/client/chat-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/chat-client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/chat-client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/chat-client/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/chat-client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/chat-client/src/App.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />

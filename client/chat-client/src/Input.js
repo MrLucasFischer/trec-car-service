@@ -29,6 +29,7 @@ class Input extends Component {
                         autofocus="true"
                     />
                     <button>Send</button>
+                    <span onClick={this.props.resetMessages}>Reset</span>
                 </form>
             </div>
         );

@@ -51,6 +51,17 @@ class App extends Component {
 
   }
 
+  resetMessages = () => {
+    this.setState({
+      messages: [
+        {
+          text: "Hi! Ask me a question and I'll answer!",
+          fromBot: true,
+        }
+      ]
+    })
+  }
+
 
   render() {
     return (
@@ -59,12 +70,10 @@ class App extends Component {
         <div className="App-header">
           <h1>Chatbot</h1>
         </div>
-        <Messages
-          messages={this.state.messages}
-        />
-        <Input
-          onSendMessage={this.onSendMessage}
-        />
+
+        <Messages messages={this.state.messages} />
+
+        <Input onSendMessage={this.onSendMessage} resetMessages={this.resetMessages}/>
       </div>
     );
   }

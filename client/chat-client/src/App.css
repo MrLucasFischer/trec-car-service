@@ -5,6 +5,12 @@
   height: 100vh;
 }
 
+.Row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .App-header {
   background-color: #262626;
   overflow: visible;
@@ -88,7 +94,7 @@ input {
   flex-grow: 1;
 }
 
-button {
+button, span {
   padding: 5px 10px;
   font-size: 16px;
   background-color: grey;
