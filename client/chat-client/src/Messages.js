@@ -4,16 +4,18 @@ import React from "react";
 class Messages extends Component {
 
     renderMessage(message) {
-        const { text, fromBot } = message;
+        const { text, fromBot, photo } = message;
         const className = fromBot ?
             "Messages-message" : "Messages-message currentMember";
+        const messageToDisplay = photo ?
+        <img src={text}/> : <div className="text">{text}</div>
         return (
             <li className={className}>
                 <div className="Message-content">
                     <div className="username">
                         {fromBot ? "Bot" : "User"}
                     </div>
-                    <div className="text">{text}</div>
+                    {messageToDisplay}
                 </div>
             </li>
         );
