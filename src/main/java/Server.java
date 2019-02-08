@@ -35,7 +35,6 @@ public class Server {
      */
     private static void setUpEndPoints() {
 
-
         get("/", (req, res) -> "hello");
 
         get("/search", (req, res) -> {
