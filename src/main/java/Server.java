@@ -52,7 +52,7 @@ public class Server {
                 indexController.setSimilarity(queryMap.get("mu").floatValue());
             }
 
-            ArrayList<String> passages = indexController.getPassages(queryMap.get("q").value(), 100);
+            ArrayList<String> passages = indexController.getPassages(queryMap.get("q").value(), 1000);
 
             return passages.size() != 0 ? passages : "I'm sorry, I don't have an answer for that";
         }, gson::toJson);

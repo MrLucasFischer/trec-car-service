@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="539ed9eb-ef00-4843-bf8e-f046e5cf4da3" name="Default Changelist" comment="Changing to 100 results">
+    <list default="true" id="539ed9eb-ef00-4843-bf8e-f046e5cf4da3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Server.java" afterDir="false" />
     </list>
@@ -18,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="46" column="39" lean-forward="true" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+            <state relative-caret-position="792">
+              <caret line="54" column="100" selection-start-line="54" selection-start-column="100" selection-end-line="54" selection-end-column="100" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1751#1752#0" expanded="true" />
@@ -128,7 +128,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549645559785" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549646283709" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -508,7 +508,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549644476016</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Changing to 100 results">
+      <created>1549645564855</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1549645564855</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -575,7 +582,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.sh" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Testing setUpIndex" />
     <MESSAGE value="Setting up index" />
     <MESSAGE value="update" />
     <MESSAGE value="correcting server" />
@@ -600,7 +606,8 @@
     <MESSAGE value="Retrieving more than one passage" />
     <MESSAGE value="removed branch" />
     <MESSAGE value="returning as json" />
-    <option name="LAST_COMMIT_MESSAGE" value="returning as json" />
+    <MESSAGE value="Changing to 100 results" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changing to 100 results" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://$MAVEN_REPOSITORY$/com/sparkjava/spark-core/2.7.2/spark-core-2.7.2.jar!/spark/Spark.class" />
@@ -699,8 +706,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="46" column="39" lean-forward="true" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+        <state relative-caret-position="792">
+          <caret line="54" column="100" selection-start-line="54" selection-start-column="100" selection-end-line="54" selection-end-column="100" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1751#1752#0" expanded="true" />
