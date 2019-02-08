@@ -1,3 +1,4 @@
+import com.google.gson.Gson;
 import spark.QueryParamsMap;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import static spark.Spark.*;
 public class Server {
 
     private static IndexController indexController = new IndexController();
+    private static Gson gson = new Gson();
 
     public static void main(String[] args) {
 
@@ -17,6 +19,7 @@ public class Server {
         }
 
         port(5901);
+
         CorsFilter.apply();
         setUpIndex(args[0]);
         setUpEndPoints();
@@ -52,7 +55,7 @@ public class Server {
             ArrayList<String> passages = indexController.getPassages(queryMap.get("q").value(), 100);
 
             return passages.size() != 0 ? passages : "I'm sorry, I don't have an answer for that";
-        });
+        }, gson::toJson);
     }
 
     /**
