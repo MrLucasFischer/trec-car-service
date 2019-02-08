@@ -49,9 +49,9 @@ public class Server {
                 indexController.setSimilarity(queryMap.get("mu").floatValue());
             }
 
-            ArrayList<String> passages = indexController.getPassages(queryMap.get("q").value(), 1);
+            ArrayList<String> passages = indexController.getPassages(queryMap.get("q").value(), 100);
 
-            return passages.size() != 0 ? passages.get(0) : "I'm sorry, I don't have an answer for that";
+            return passages.size() != 0 ? passages : "I'm sorry, I don't have an answer for that";
         });
     }
 
