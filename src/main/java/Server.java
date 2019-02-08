@@ -38,6 +38,7 @@ public class Server {
         get("/", (req, res) -> "hello");
 
         get("/search", (req, res) -> {
+            res.type("application/json");
             QueryParamsMap queryMap = req.queryMap();
 
             if ("bm25".equals(queryMap.get("algo").value())) {
